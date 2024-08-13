@@ -41,117 +41,93 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <Block flex middle>
+
+    <Block safe flex middle>
       <StatusBar />
+      <Block flex>
+        <Block flex={0.2} middle>
+          <Image styles={styles.logo} source={Images.Logo} />
 
-      <Block safe flex middle>
-        <Block style={styles.registerContainer}>
-          <Block flex>
-            <Block flex={0.2} middle>
-              <Image styles={styles.logo} source={Images.Logo} />
-
-            </Block>
-            <Block flex center>
-              <KeyboardAvoidingView
-                style={{ flex: 1 }}
-                behavior="padding"
-                enabled
-              >
-                <Block width={width * 0.8} style={{ marginBottom: 15 }}>
-                  <Input
-                    borderless
-                    placeholder="Username"
-                    value={username}
-                    onChangeText={setUserName}
-                    iconContent={
-                      <Icon
-                        size={16}
-                        color={argonTheme.COLORS.ICON}
-                        name="user"
-                        family="Feather"
-                        style={styles.inputIcons}
-                      />
-                    }
-                  />
-
-                </Block>
-
-                <Block width={width * 0.8}>
-                  <Input
-                    password
-                    borderless
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassWord}
-                    iconContent={
-                      <Icon
-                        size={16}
-                        color={argonTheme.COLORS.ICON}
-                        name="lock"
-                        family="Feather"
-                        style={styles.inputIcons}
-                      />
-                    }
-                  />
-                </Block>
-                <Block row width={width * 0.75}>
-                  <Checkbox
-                    checkboxStyle={{
-                      borderWidth: 3
-                    }}
-                    color={argonTheme.COLORS.BLACK}
-                    label="I agree with the"
-                  />
-                  <Button
-                    style={{ width: 100 }}
-                    color="transparent"
-                    textStyle={{
-                      color: argonTheme.COLORS.GRADIENT_START,
-                      fontSize: 14
-                    }}
-                  >
-                    Privacy Policy
-                  </Button>
-                </Block>
-                <Block middle>
-                  <Button style={styles.createButton} onPress={handleLogin} >
-                    <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                      Sign In
-                    </Text>
-                  </Button>
-                </Block>
-              </KeyboardAvoidingView>
-            </Block>
-          </Block>
         </Block>
-      </Block>
-    </Block>
+        <Block flex center>
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior="padding"
+            enabled
+          >
+            <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+              <Input
+                borderless
+                placeholder="Username"
+                value={username}
+                onChangeText={setUserName}
+                iconContent={
+                  <Icon
+                    size={16}
+                    color={argonTheme.COLORS.ICON}
+                    name="user"
+                    family="Feather"
+                    style={styles.inputIcons}
+                  />
+                }
+              />
+
+            </Block>
+
+            <Block width={width * 0.8}>
+              <Input
+                password
+                borderless
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassWord}
+                iconContent={
+                  <Icon
+                    size={16}
+                    color={argonTheme.COLORS.ICON}
+                    name="lock"
+                    family="Feather"
+                    style={styles.inputIcons}
+                  />
+                }
+              />
+            </Block>
+            <Block row center width={width * 0.75} style={styles.passwordCheck}>
+              <Checkbox
+                checkboxStyle={{
+                  borderWidth: 3
+                }}
+                color={argonTheme.COLORS.BLACK}
+                label="I agree with the"
+              />
+              <Text
+                style={{ width: 100, color: argonTheme.COLORS.PRIMARY, marginLeft: 5 }}
+              >
+                Privacy Policy
+              </Text>
+            </Block>
+            <Block middle>
+              <Button style={styles.createButton} onPress={handleLogin} >
+                <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+                  Sign In
+                </Text>
+              </Button>
+            </Block>
+          </KeyboardAvoidingView>
+        </Block>
+      </Block >
+    </Block >
   );
 }
 
 const styles = StyleSheet.create({
-  registerContainer: {
-    width: width * 0.9,
-    height: height * 0.875,
-    backgroundColor: "#F4F5F7",
-    borderRadius: 4,
-    shadowColor: argonTheme.COLORS.BLACK,
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    shadowRadius: 8,
-    shadowOpacity: 0.1,
-    elevation: 1,
-    overflow: "hidden"
-  },
   inputIcons: {
     marginRight: 12
   },
   passwordCheck: {
-    paddingLeft: 15,
-    paddingTop: 13,
-    paddingBottom: 30
+    paddingLeft: 0,
+    paddingTop: 15,
+    paddingBottom: 15
   },
   createButton: {
     width: '100%',

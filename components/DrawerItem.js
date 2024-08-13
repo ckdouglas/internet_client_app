@@ -39,9 +39,9 @@ class DrawerItem extends React.Component {
       case "Statistics":
         return (
           <Icon
-            name="chart-pie-35"
-            family="ArgonExtra"
-            size={14}
+            name="trending-up"
+            family="MaterialIcons"
+            size={20}
             color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
           />
         );

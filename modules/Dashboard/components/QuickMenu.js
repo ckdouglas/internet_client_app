@@ -22,7 +22,7 @@ const QuickMenu = ({ menuItems }) => {
           }}
         >
           {
-            menuItems.map((item) => <Block center key={item.name}>
+            menuItems.map((item) => <Block center key={item.label}>
               <Icon
                 name={item.icon}
                 family="MaterialIcons"
