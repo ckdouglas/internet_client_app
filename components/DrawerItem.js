@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Linking } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Icon from "./Icon";
@@ -58,8 +58,17 @@ class DrawerItem extends React.Component {
         return (
           <AntDesign
             name="questioncircle"
-            size={24}
+            size={20}
             color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
+          />
+        );
+      case "Log out":
+        return (
+          <Icon
+            name="logout"
+            size={20}
+            family="MaterialIcons"
+            color={focused ? defaultTheme.COLORS.ERROR : defaultTheme.COLORS.ERROR}
           />
         );
 
@@ -80,10 +89,7 @@ class DrawerItem extends React.Component {
       <TouchableOpacity
         style={{ height: 60 }}
         onPress={() =>
-          title == "FAQs"
-            ? Linking.openURL(
-              "https://demos.creative-tim.com/argon-pro-react-native/docs/"
-            ).catch(err => console.error("An error occurred", err))
+          title === "Log out" ? this.props.onPress()
             : navigation.navigate(title)
         }
       >
