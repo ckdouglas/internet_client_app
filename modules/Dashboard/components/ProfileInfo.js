@@ -10,6 +10,7 @@ const ProfileInfo = ({ user }) => {
             margin: 10,
             marginTop: 16,
             paddingTop: 0,
+            backgroundColor: 'white'
         }}
         >
             <Block

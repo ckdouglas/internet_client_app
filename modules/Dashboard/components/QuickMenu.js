@@ -1,15 +1,16 @@
 import React from "react";
 import { Block, Card, Text } from "galio-framework";
 import { Icon } from "../../../components";
+import { TouchableOpacity } from "react-native";
 
 const QuickMenu = ({ menuItems }) => {
   return (
-    <Block>
-      <Text>Quick Menu</Text>
+    <Block style={{margin: 10}}>
+      <Text style={{fontSize: 18}}>Quick Menu</Text>
       <Card style={{
-        margin: 10,
         marginTop: 16,
         paddingTop: 0,
+         backgroundColor: 'white',
       }}
       >
         <Block
@@ -22,14 +23,14 @@ const QuickMenu = ({ menuItems }) => {
           }}
         >
           {
-            menuItems.map((item) => <Block center key={item.label}>
+            menuItems.map((item) => <TouchableOpacity center key={item.label} onPress={item.onPress}>
               <Icon
                 name={item.icon}
                 family="MaterialIcons"
                 size={24}
               />
               <Text>{item.label}</Text>
-            </Block>)
+            </TouchableOpacity>)
           }
         </Block>
       </Card>

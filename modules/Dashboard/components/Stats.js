@@ -4,12 +4,12 @@ import { Icon } from "../../../components";
 
 const Stats = ({ stats }) => {
     return (
-        <Block>
-            <Text>Stats</Text>
+        <Block style={{ margin: 10 }}>
+            <Text style={{fontSize: 18}}>Stats</Text>
             <Card style={{
-                margin: 10,
                 marginTop: 16,
                 paddingTop: 0,
+                backgroundColor: 'white'
             }}
             >
                 <Block
