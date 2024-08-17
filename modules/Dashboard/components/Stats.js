@@ -5,7 +5,7 @@ import { Icon } from "../../../components";
 const Stats = ({ stats }) => {
     return (
         <Block style={{ margin: 10 }}>
-            <Text style={{fontSize: 18}}>Stats</Text>
+            <Text style={{fontWeight: 'bold'}}>STATS</Text>
             <Card style={{
                 marginTop: 16,
                 paddingTop: 0,

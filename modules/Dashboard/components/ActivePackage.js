@@ -5,7 +5,7 @@ import { Icon } from "../../../components";
 const ActivePackage = () => {
     return (
         <Block style={{ margin: 10 }}>
-            <Text style={{fontSize: 18}}>Active package</Text>
+            <Text style={{fontWeight: 'bold'}}>ACTIVE PACKAGE</Text>
             <Card style={{
                 marginTop: 16,
                 paddingTop: 0,
