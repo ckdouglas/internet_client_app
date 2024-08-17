@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Block, Button, Text } from 'galio-framework';
 
-const Finance = () => {
+const Finance = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Block row style={styles.cardContainer}>
@@ -13,7 +13,7 @@ const Finance = () => {
             size="large"
             shadowless
             style={styles.button}
-            onPress={() => console.log('Invoices Pressed')}>
+            onPress={() => navigation.navigate('Reciepts')}>
             <Text color="info">Reciepts</Text>
           </Button>
         </Block>
@@ -25,7 +25,7 @@ const Finance = () => {
             size="large"
             shadowless
             style={styles.button}
-            onPress={() => console.log('Statements Pressed')}>
+            onPress={() => navigation.navigate('Invoices')}>
             <Text color="success">Invoices</Text>
           </Button>
         </Block>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     marginHorizontal: 10,
-    borderRadius: 10,
+    borderRadius: 5,
     elevation: 5,
     backgroundColor: 'white',
   },

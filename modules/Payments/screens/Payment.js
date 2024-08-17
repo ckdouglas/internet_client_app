@@ -1,8 +1,120 @@
 import React from 'react';
-import { Text } from 'galio-framework';
+import { ScrollView, View, TextInput, TouchableOpacity } from 'react-native';
+import { Block, Text } from 'galio-framework';
 
-const Payment = () => {
-  return(<Text>Payments</Text>)
-}
+const paymentDetails = {
+  accountBalance: '0.00 Sh',
+  totalAmountDue: '100',
+};
 
-export default Payment;
+const PaymentScreen = () => {
+  return (
+    <Block safe flex style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        {/* Payment Information Card */}
+        <Block style={styles.paymentCard}>
+          <Text style={styles.headerLabel}>Account Balance</Text>
+          <Text style={styles.accountBalance}>{paymentDetails.accountBalance}</Text>
+
+          <Text style={styles.amountDueLabel}>Total Amount Due</Text>
+
+          <Block row style={styles.inputContainer}>
+            <View style={styles.currencyBox}>
+              <Text style={styles.currencyText}>Sh</Text>
+            </View>
+            <TextInput
+              style={styles.amountInput}
+              value={paymentDetails.totalAmountDue}
+              keyboardType="numeric"
+            />
+            <TouchableOpacity style={styles.payButton}>
+              <Text style={styles.payButtonText}>Pay by</Text>
+            </TouchableOpacity>
+          </Block>
+        </Block>
+      </ScrollView>
+    </Block>
+  );
+};
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 20,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  paymentCard: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 12,
+    width: '90%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  headerLabel: {
+    fontSize: 16,
+    color: '#888',
+    marginBottom: 5,
+  },
+  accountBalance: {
+    fontSize: 24,
+    color: '#333',
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  amountDueLabel: {
+    fontSize: 14,
+    color: '#777',
+    marginBottom: 10,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  currencyBox: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+    backgroundColor: '#f5f5f5',
+  },
+  currencyText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  amountInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+    backgroundColor: '#fff',
+  },
+  payButton: {
+    backgroundColor: '#007BFF',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginLeft: 10,
+  },
+  payButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+};
+
+export default PaymentScreen;

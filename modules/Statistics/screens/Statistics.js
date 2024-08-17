@@ -1,67 +1,25 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Modal, StyleSheet } from 'react-native';
 import { Block, Text, Card, Icon, Button } from 'galio-framework';
-import DatePicker from 'react-native-date-picker';
-import ModalSelector from 'react-native-modal-selector';
+import DatePicker from '../../../components/DatePicker';
 
+// Statistics Component
 const Statistics = () => {
-  const [selectedDateRange, setSelectedDateRange] = useState("2024-08-10 - 2024-08-11");
-  const [openDatePicker, setOpenDatePicker] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState("HOME 7MPBS");
-
-  const data = [
-    { key: 1, label: 'HOME 7MPBS' },
-    { key: 2, label: 'OFFICE 20MPBS' },
-  ];
-
-  const handleDateConfirm = (selectedDate) => {
-    setDate(selectedDate);
-    setSelectedDateRange(`${selectedDate.toISOString().split('T')[0]} - ${selectedDate.toISOString().split('T')[0]}`);
-    setOpenDatePicker(false);
-  };
+  const [startDate, setStartDate] = useState('2024-08-10');
+  const [endDate, setEndDate] = useState('2024-08-11');
 
   return (
     <View style={styles.container}>
-      {/* Dropdown */}
-      <Block style={styles.dropdown}>
-        <ModalSelector
-          data={data}
-          initValue={selectedOption}
-          onChange={(option) => setSelectedOption(option.label)}
-        >
-          <Button color="transparent" style={styles.selectorButton}>
-            <Text>{selectedOption}</Text>
-            <Icon name="chevron-down" family="feather" size={16} color="gray" />
-          </Button>
-        </ModalSelector>
-      </Block>
-
       {/* Date Range Input */}
-      <Block style={styles.dateRange}>
-        <Button
-          color="transparent"
-          onPress={() => setOpenDatePicker(true)}
-          style={styles.dateButton}
-        >
-          <Text>{selectedDateRange}</Text>
-          <Icon name="calendar" family="feather" size={16} color="gray" />
-        </Button>
-        <DatePicker
-          modal
-          mode="date"
-          open={openDatePicker}
-          date={date}
-          onConfirm={handleDateConfirm}
-          onCancel={() => setOpenDatePicker(false)}
-        />
-      </Block>
+      <DatePicker
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+      />
 
       {/* Total for period card */}
-      <Card
-        borderless
-        style={styles.card}
-      >
+      <Card borderless style={styles.card}>
         <Block row space="between" style={styles.cardHeader}>
           <Block row>
             <Icon name="calendar" family="feather" size={20} color="orange" />
@@ -79,10 +37,7 @@ const Statistics = () => {
       </Card>
 
       {/* Usage by day card */}
-      <Card
-        borderless
-        style={styles.card}
-      >
+      <Card borderless style={styles.card}>
         <Block row space="between" style={styles.cardHeader}>
           <Block row>
             <Icon name="bar-chart-2" family="feather" size={20} color="blue" />
@@ -116,30 +71,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 20,
-  },
-  header: {
-    paddingTop: 40,
-    paddingBottom: 20,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  headerButton: {
-    padding: 10,
-  },
-  headerText: {
-    flex: 1,
-    textAlign: 'center',
-  },
-  dropdown: {
-    marginBottom: 10,
-    width: '100%',
+    paddingTop: 10,
   },
   dateRange: {
-    marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  dateButton: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '45%',
+    borderColor: 'gray',
+    paddingHorizontal: 10,
   },
   card: {
     padding: 20,
-    marginBottom: 20,
   },
   statsRow: {
     paddingVertical: 5,
@@ -150,24 +97,20 @@ const styles = StyleSheet.create({
   cardTitle: {
     marginLeft: 10,
   },
-  selectorButton: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderRadius: 4,
-    width: '100%',
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  dateButton: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+  modalContent: {
+    backgroundColor: 'white',
+    margin: 20,
+    borderRadius: 10,
+    padding: 20,
     alignItems: 'center',
-    width: '100%',
-    borderColor: 'gray',
-    paddingHorizontal: 10,
+  },
+  closeButton: {
+    marginTop: 10,
   },
 });
 
