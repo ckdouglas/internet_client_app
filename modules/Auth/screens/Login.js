@@ -43,7 +43,6 @@ const Login = ({ navigation }) => {
   return (
     <Block flex middle>
       <StatusBar />
-
       <Block safe flex middle>
         <Block style={styles.registerContainer}>
           <Block flex>
