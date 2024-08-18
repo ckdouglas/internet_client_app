@@ -1,8 +1,7 @@
 import { Block, Text, theme } from "galio-framework";
-import { Image, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 import { DrawerItem as DrawerCustomItem } from "../../../components";
-import Images from "../../../constants/Images";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Auth/slice";
@@ -24,7 +23,7 @@ function CustomDrawerContent({
       forceInset={{ top: "always", horizontal: "never" }}
     >
       <Block flex={0.06} style={styles.header}>
-        <Image styles={styles.logo} source={Images.Logo} />
+        {/* <Image styles={styles.logo} source={Images.Logo} /> */}
       </Block>
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>

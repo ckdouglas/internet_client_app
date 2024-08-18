@@ -4,12 +4,12 @@ import { Icon } from "../../../components";
 
 const ActivePackage = () => {
     return (
-        <Block>
-            <Text>Active package</Text>
+        <Block style={{ margin: 10 }}>
+            <Text style={{fontWeight: 'bold'}}>ACTIVE PACKAGE</Text>
             <Card style={{
-                margin: 10,
                 marginTop: 16,
                 paddingTop: 0,
+                 backgroundColor: 'white',
             }}
             >
                 <Block

@@ -4,17 +4,19 @@ import { ProfileInfo, Stats } from "../components";
 import ActivePackage from "../components/ActivePackage";
 import QuickMenu from "../components/QuickMenu";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
- const stats = {download: 70, upload: 60};
+  const stats = {download: 70, upload: 60};
+  const navigation = useNavigation();
 
   const quickMenuItems = [
     {
       label: 'Router',
       icon: 'router',
       onPress: () => {
-        console.log("Navigate to Router");
+        navigation.navigate("RouterManagementStack");
       }
     },
     {
@@ -28,20 +30,20 @@ const Dashboard = () => {
       label: 'Financials',
       icon: 'payment',
       onPress: () => {
-        console.log("Navigate to Financials");
+        navigation.navigate("FinanceStack");
       }
     },
     {
       label: 'Stats',
       icon: 'trending-up',
       onPress: () => {
-        console.log("Navigate to Stats");
+        navigation.navigate("StatisticsStack");
       }
     },
   ]
 
   return (
-    <Block>
+    <Block safe>
       <ProfileInfo user={user} />
       <ActivePackage package={null} />
       <QuickMenu menuItems={quickMenuItems} />
