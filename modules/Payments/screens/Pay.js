@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-nati
 import { Block, Text } from 'galio-framework';
 import { Picker } from '@react-native-picker/picker';
 
-const PaymentForm = ({ navigation }) => {
+const Pay = ({ navigation }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [months, setMonths] = useState('');
     const [amount, setAmount] = useState('');
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PaymentForm;
+export default Pay;
