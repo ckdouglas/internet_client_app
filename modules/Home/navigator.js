@@ -34,6 +34,7 @@ export default function AppDrawerNavigator() {
           marginLeft: 12,
           fontWeight: 'normal',
         },
+
       }}
       initialRouteName="Dashboard"
     >

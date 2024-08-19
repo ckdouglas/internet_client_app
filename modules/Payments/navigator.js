@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Header } from "../../components";
 import Payment from "./screens/Payment";
+import Pay from "./screens/Pay";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,18 @@ function PaymentStack() {
           ),
         }}
       />
+      <Stack.Screen
+        name="Pay"
+        component={Pay}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Pay" navigation={navigation} scene={scene} />
+          ),
+        }}
+      />
     </Stack.Navigator>
+
+
   );
 }
 
