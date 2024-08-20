@@ -1,10 +1,12 @@
 import { Block, Text, theme } from "galio-framework";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, Image } from "react-native";
 
 import { DrawerItem as DrawerCustomItem } from "../../../components";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Auth/slice";
+import { Images } from "../../../constants";
+
 
 function CustomDrawerContent({
   drawerPosition,
@@ -14,7 +16,8 @@ function CustomDrawerContent({
   state,
   ...rest
 }) {
-  const screens = ["Dashboard", "Finance", "Payment", "Statistics", "Router Management"];
+  const screens = ["Dashboard", "Finance", "Payment", "Statistics", "Router Management", "Tickets",  "FAQs"];
+  // disabled "Speed Test",
   const dispatch = useDispatch();
 
   return (
@@ -23,7 +26,7 @@ function CustomDrawerContent({
       forceInset={{ top: "always", horizontal: "never" }}
     >
       <Block flex={0.06} style={styles.header}>
-        {/* <Image styles={styles.logo} source={Images.Logo} /> */}
+        <Image styles={styles.logo} source={Images.Logo} />
       </Block>
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
@@ -52,9 +55,8 @@ function CustomDrawerContent({
 
             </Text>
           </Block>
-          <DrawerCustomItem title="FAQs" navigation={navigation} />
         </ScrollView>
-        <DrawerCustomItem onPress={()=> dispatch(logout())} title="Log out" navigation={navigation} />
+        <DrawerCustomItem onPress={() => dispatch(logout())} title="Log out" navigation={navigation} />
       </Block>
     </Block>
   );
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
     paddingBottom: theme.SIZES.BASE,
     paddingTop: theme.SIZES.BASE * 3,
     justifyContent: "center",
+    marginTop: 28
   },
 });
 

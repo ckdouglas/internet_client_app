@@ -1,18 +1,53 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import { Block, Text } from 'galio-framework';
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
-const Pay = ({ navigation }) => {
+const NumberPicker = ({ value, onChange }) => {
+    const increment = () => onChange(value + 1);
+    const decrement = () => {
+        if (value > 1) {
+            onChange(value - 1);
+        }
+    };
+
+    const handleChangeText = (text) => {
+        // Only allow numeric input
+        const numericValue = text.replace(/[^0-9]/g, '');
+        onChange(parseInt(numericValue || '0', 10));
+    };
+
+    return (
+        <View style={styles.pickerContainer}>
+            <TouchableOpacity
+                onPress={decrement}
+                style={[styles.button, value <= 1 && styles.disabledButton]}
+                disabled={value <= 1}
+            >
+                <Text style={[styles.buttonText, value <= 1 && styles.disabledButtonText]}>-</Text>
+            </TouchableOpacity>
+            <TextInput
+                style={styles.valueContainer}
+                value={String(value)}
+                onChangeText={handleChangeText}
+                keyboardType="numeric"
+                textAlign="center"
+            />
+            <TouchableOpacity onPress={increment} style={styles.button}>
+                <Text style={styles.buttonText}>+</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
+
+const Pay = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [months, setMonths] = useState('');
-    const [amount, setAmount] = useState('');
+    const [months, setMonths] = useState(1); // Default to 1 month
+    const [amount, setAmount] = useState('2000'); // Amount as text input
+    const [baseAmount] = useState('2000'); // Base amount
 
     const handlePayment = () => {
         if (phoneNumber && amount && months) {
-            // Simulate a successful payment
-            Alert.alert('Payment Successful', 'Your payment has been processed.', [
-                { text: 'OK', onPress: () => navigation.navigate('PaymentPage') }
+            Alert.alert('Payment Successful', `Your payment of ${amount} has been processed.`, [
+                { text: 'OK' }
             ]);
         } else {
             Alert.alert('Payment Failed', 'Please complete all fields.', [
@@ -21,63 +56,67 @@ const Pay = ({ navigation }) => {
         }
     };
 
+    const handlePhoneNumberChange = (text) => {
+        // Only allow numeric input
+        const numericValue = text.replace(/[^0-9]/g, '');
+        setPhoneNumber(numericValue);
+    };
+
+    const handleAmountChange = (text) => {
+        // Only allow numeric input
+        const numericValue = text.replace(/[^0-9]/g, '');
+        setAmount(numericValue);
+
+        if (numericValue) {
+            const newMonths = Math.max(Math.floor(parseInt(numericValue) / parseInt(baseAmount)), 1);
+            setMonths(newMonths);
+        } else {
+            setMonths(1); // Reset to 1 if input is cleared
+        }
+    };
+
+    const handleMonthsChange = (newMonths) => {
+        setMonths(newMonths);
+        const newAmount = parseInt(baseAmount) * newMonths;
+        setAmount(String(newAmount));
+    };
+
     return (
-        <Block safe flex style={styles.container}>
-            <View style={styles.formContainer}>
-                <Text style={styles.label}>Phone Number</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="07xxxxxxxx"
-                    keyboardType="phone-pad"
-                    value={phoneNumber}
-                    onChangeText={setPhoneNumber}
-                />
-                <Text style={styles.label}>Months</Text>
-                <Picker
-                    selectedValue={months}
-                    style={styles.picker}
-                    onValueChange={(itemValue) => setMonths(itemValue)}
-                >
-                    <Picker.Item label="Select months" value="" />
-                    <Picker.Item label="1" value="1" />
-                    <Picker.Item label="2" value="2" />
-                    <Picker.Item label="3" value="3" />
-                    <Picker.Item label="4" value="4" />
-                    <Picker.Item label="5" value="5" />
-                    <Picker.Item label="6" value="6" />
-                </Picker>
-                <Text style={styles.label}>Amount</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="2000"
-                    keyboardType="numeric"
-                    value={amount}
-                    onChangeText={setAmount}
-                />
-                <TouchableOpacity style={styles.payButton} onPress={handlePayment}>
-                    <Text style={styles.payButtonText}>Pay</Text>
-                </TouchableOpacity>
-            </View>
-        </Block>
+        <View style={styles.container}>
+            <Text style={styles.label}>Phone Number</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="07xxxxxxxx"
+                keyboardType="numeric"
+                value={phoneNumber}
+                onChangeText={handlePhoneNumberChange}
+            />
+
+            <Text style={styles.label}>Months</Text>
+            <NumberPicker value={months} onChange={handleMonthsChange} />
+
+            <Text style={styles.label}>Amount</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Enter amount"
+                keyboardType="numeric"
+                value={amount}
+                onChangeText={handleAmountChange}
+            />
+
+            <TouchableOpacity style={styles.payButton} onPress={handlePayment}>
+                <Text style={styles.payButtonText}>Pay</Text>
+            </TouchableOpacity>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f4f4f4',
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-    },
-    formContainer: {
         backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 8,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 6,
-        elevation: 8,
+        paddingHorizontal: 20,
+        marginTop: 25
     },
     label: {
         fontSize: 16,
@@ -94,10 +133,35 @@ const styles = StyleSheet.create({
         fontSize: 16,
         backgroundColor: '#fff',
     },
-    picker: {
-        height: 50,
-        width: '100%',
-        marginBottom: 15,
+    pickerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    button: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 4,
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+        backgroundColor: '#f0f0f0',
+    },
+    disabledButton: {
+        backgroundColor: '#ddd',
+        borderColor: '#aaa',
+    },
+    buttonText: {
+        fontSize: 18,
+        color: '#333',
+    },
+    disabledButtonText: {
+        color: '#aaa',
+    },
+    valueContainer: {
+        width: 50,
+        textAlign: 'center',
+        fontSize: 18,
+        color: '#333',
     },
     payButton: {
         backgroundColor: '#007BFF',

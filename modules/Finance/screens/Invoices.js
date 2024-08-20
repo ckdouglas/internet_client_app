@@ -66,7 +66,7 @@ const Invoices = ({ navigation }) => {
 const styles = {
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#fff',
         paddingHorizontal: 20,
         paddingTop: 10,
     },

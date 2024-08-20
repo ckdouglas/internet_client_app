@@ -41,7 +41,7 @@ const PaymentScreen = ({navigation}) => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     padding: 20,
   },
   contentContainer: {

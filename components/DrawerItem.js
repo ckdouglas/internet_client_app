@@ -54,6 +54,26 @@ class DrawerItem extends React.Component {
             color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
           />
         );
+
+      case "Tickets":
+        return (
+          <Icon
+            name="queue"
+            family="MaterialIcons"
+            size={20}
+            color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
+          />
+        );
+
+      case "Speed Test":
+        return (
+          <Icon
+            name="speed"
+            family="MaterialIcons"
+            size={20}
+            color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
+          />
+        );
       case "FAQs":
         return (
           <AntDesign

@@ -58,7 +58,7 @@ const Reciepts = ({ navigation }) => {
 const styles = {
     container: {
         padding: 20,
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#fff',
     },
 
     title: {

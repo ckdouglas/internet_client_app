@@ -46,8 +46,7 @@ const Login = ({ navigation }) => {
       <StatusBar />
       <Block flex>
         <Block flex={0.2} middle>
-          {/* <Image styles={styles.logo} source={Images.Logo} /> */}
-          <Text style={styles.title}>AGAPE INTERNET SOLUTIONS</Text>
+          <Image styles={styles.logo} source={Images.Logo} />
         </Block>
         <Block flex center>
           <KeyboardAvoidingView
@@ -121,9 +120,6 @@ const Login = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 28
-  },
   inputIcons: {
     marginRight: 12
   },
