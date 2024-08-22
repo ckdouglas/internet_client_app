@@ -24,24 +24,18 @@ function Router_ManagementStack({ navigation }) {
           name="Devices List"
           component={Devices}
           options={{
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.navigate("RouterManagementStack")} style={{ padding: 10 }}>
-                <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-              </TouchableOpacity>
+            header: ({ navigation, scene }) => (
+              <Header title="Devices" navigation={navigation} back scene={scene} />
             ),
-            headerTitle: 'Devices List',
           }}
         />
         <Stack.Screen
           name="Manage WI-FI"
           component={ManageWifi}
           options={{
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.navigate("RouterManagementStack")} style={{ padding: 10 }}>
-                <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-              </TouchableOpacity>
+            header: ({ navigation, scene }) => (
+              <Header title="Manage Wifi" navigation={navigation} back scene={scene} />
             ),
-            headerTitle: 'Manage WI-FI',
           }}
         />
       </Stack.Navigator>

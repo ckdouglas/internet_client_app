@@ -1,20 +1,21 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import FAQs from "./screens/FAQs";
 import { Header } from "../../components";
+import SpeedTest from "./screens/SpeedTest"
+
 const Stack = createStackNavigator();
 
-export default function FAQStack() {
+export default function SpeedTestStack() {
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: 'screen', cardStyle: { backgroundColor: '#F8F9FE' } }}
         >
             <Stack.Screen
-                name="FAQStack"
-                component={FAQs}
+                name="SpeedTestStack"
+                component={SpeedTest}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header title="FAQs" navigation={navigation} scene={scene} />
+                        <Header title="Speed Test" navigation={navigation} scene={scene} />
                     ),
                 }}
             />

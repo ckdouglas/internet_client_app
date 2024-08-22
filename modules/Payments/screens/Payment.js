@@ -7,16 +7,17 @@ const paymentDetails = {
   totalAmountDue: '100',
 };
 
-const PaymentScreen = () => {
+const PaymentScreen = ({navigation}) => {
   return (
     <Block safe flex style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {/* Payment Information Card */}
         <Block style={styles.paymentCard}>
+
           <Text style={styles.headerLabel}>Account Balance</Text>
           <Text style={styles.accountBalance}>{paymentDetails.accountBalance}</Text>
 
-          <Text style={styles.amountDueLabel}>Total Amount Due</Text>
+          <Text style={styles.amountDueLabel}>Amount To Pay</Text>
 
           <Block row style={styles.inputContainer}>
             <View style={styles.currencyBox}>
@@ -27,8 +28,8 @@ const PaymentScreen = () => {
               value={paymentDetails.totalAmountDue}
               keyboardType="numeric"
             />
-            <TouchableOpacity style={styles.payButton}>
-              <Text style={styles.payButtonText}>Pay by</Text>
+            <TouchableOpacity style={styles.payButton} onPress={() => {navigation.navigate('Pay')}}>
+              <Text style={styles.payButtonText}>Pay</Text>
             </TouchableOpacity>
           </Block>
         </Block>
@@ -40,12 +41,13 @@ const PaymentScreen = () => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     padding: 20,
   },
   contentContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
+    //justifyContent: 'center',
+    marginTop: 20,
     alignItems: 'center',
   },
   paymentCard: {
@@ -82,7 +84,7 @@ const styles = {
   currencyBox: {
     borderWidth: 1,
     borderColor: '#ccc',
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 15,
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
@@ -96,19 +98,20 @@ const styles = {
     flex: 1,
     borderWidth: 1,
     borderColor: '#ccc',
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 15,
     fontSize: 16,
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 8,
     backgroundColor: '#fff',
   },
   payButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: 'green',
     paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    marginLeft: 10,
+    paddingHorizontal: 10,
+    borderBottomRightRadius: 8,
+    borderTopRightRadius: 8,
+    marginLeft: 0,
+    borderWidth: 1,
+    borderColor: '#ccc'
   },
   payButtonText: {
     color: '#fff',
