@@ -8,12 +8,12 @@ const QuickMenu = ({ menuItems }) => {
   return (
     <Block style={{ margin: 10 }}>
       <Text style={{ fontWeight: 'bold' }}>QUICK ACCESS MENU</Text>
-      <Card 
-       style={{
-        marginTop: 16,
-        paddingTop: 0,
-        backgroundColor: 'white',
-      }}
+      <Card
+        style={{
+          marginTop: 16,
+          paddingTop: 0,
+          backgroundColor: 'white',
+        }}
       >
         <Block
           row
@@ -32,7 +32,7 @@ const QuickMenu = ({ menuItems }) => {
                 size={30}
                 color="white"
               />
-              <Text style={{color:'white'}}>{item.label}</Text>
+              <Text style={{ color: 'white' }}>{item.label}</Text>
             </TouchableOpacity>)
           }
         </Block>

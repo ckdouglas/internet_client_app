@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://private-anon-a75b54b61d-splynx.apiary-mock.com'; // Replace with your actual API base URL
+const API_BASE_URL = 'https://billing.agapetechfibre.co.ke/api/2.0/admin';
+
 
 export const apiClient = axios.create({
     baseURL: API_BASE_URL,

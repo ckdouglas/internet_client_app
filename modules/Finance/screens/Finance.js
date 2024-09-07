@@ -7,17 +7,15 @@ const Finance = ({ navigation }) => {
     <View style={styles.container}>
       <Block row style={styles.cardContainer}>
         <Block style={styles.card}>
-          <View style={styles.shadowWrapper}>
-            <Button
-              color="transparent"
-              round
-              size="large"
-              shadowless
-              style={styles.button}
-              onPress={() => navigation.navigate('Reciepts')}>
-              <Text color="info">Reciepts</Text>
-            </Button>
-          </View>
+          <Button
+            color="transparent"
+            round
+            size="large"
+            shadowless
+            style={styles.button}
+            onPress={() => navigation.navigate('Reciepts')}>
+            <Text color="info">Receipts</Text>
+          </Button>
         </Block>
 
         <Block style={styles.card}>

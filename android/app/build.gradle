@@ -1,5 +1,14 @@
+project.ext.envConfigFiles = [
+        agapedebug:".env.agape",
+        agaperelease:".env.agape",
+        faibacomrelease:".env.faibacom",
+        faibacomdebug:".env.faibacom",
+]
+
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+
+apply from: project(":react-native-config").projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -37,7 +46,7 @@ react {
     //   The list of variants to that are debuggable. For those we're going to
     //   skip the bundling of the JS bundle and the assets. By default is just 'debug'.
     //   If you add flavors like lite, prod, etc. you'll have to list your debuggableVariants.
-    // debuggableVariants = ["liteDebug", "prodDebug"]
+    debuggableVariants = ["agapeDebug", "faibacomDebug"]
 
     /* Bundling */
     //   A list containing the node command and its flags. Default is just 'node'.
@@ -120,6 +129,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        flavorDimensions "default"
+
+        resValue "string","build_config_package","com.argonfreereactnative"
     }
 
     splits {
@@ -137,10 +150,39 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+              if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
     }
+
+    flavorDimensions "branding"
+    productFlavors {
+        agape {
+                minSdkVersion rootProject.ext.minSdkVersion
+                applicationId 'com.argonfreereactnative.agape'
+                targetSdkVersion rootProject.ext.targetSdkVersion
+                resValue "string", "build_config_package", "com.argonfreereactnative.agape"
+                multiDexEnabled true
+                versionNameSuffix "-agape"
+                manifestPlaceholders = [label: 'Agape Internet']
+            }
+            faibacom {
+                minSdkVersion rootProject.ext.minSdkVersion
+                applicationId 'com.argonfreereactnative.faibacom'
+                targetSdkVersion rootProject.ext.targetSdkVersion
+                resValue "string", "build_config_package", "com.argonfreereactnative.faibacom"
+                multiDexEnabled true
+                manifestPlaceholders = [label: 'Faibacom Internet']
+            }
+    }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
