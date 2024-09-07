@@ -10,36 +10,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 enableScreens();
 
-
 import { Images, articles, argonTheme } from "./constants";
 import RootNavigator from "./navigation/RootNavigator";
 
-
 import { Provider } from 'react-redux';
 import { store } from './redux/store'; // Import the Redux store
-
-// cache app images
-const assetImages = [
-  Images.Onboarding,
-  Images.LogoOnboarding,
-  Images.Logo,
-  Images.Pro,
-  Images.ArgonLogo,
-  Images.iOSLogo,
-  Images.androidLogo,
-];
-// cache product images
-articles.map((article) => assetImages.push(article.image));
-
-function cacheImages(images) {
-  return images.map((image) => {
-    if (typeof image === "string") {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
-}
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -51,7 +26,7 @@ export default function App() {
         await _loadResourcesAsync();
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync({
-          ArgonExtra: require("./assets/font/argon.ttf"),
+          ArgonExtra: require("./assets/font/.ttf"),
         });
       } catch (e) {
         console.warn(e);

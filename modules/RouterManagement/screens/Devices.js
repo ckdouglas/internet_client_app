@@ -1,5 +1,6 @@
-import { Block } from "galio-framework";
+import { Block, Text } from "galio-framework";
 import React from "react";
+import { StyleSheet } from "react-native";
 
 const Devices = () => {
   const devices = [
@@ -26,16 +27,31 @@ const Devices = () => {
   ]
 
   return (
-    <Block>
-      {
-        devices.map((item) => <Block>
-          <Tex>Name - ${item.name}</Tex>
-          <Tex>IP - ${item.ip}</Tex>
-        </Block>)
-      }
+    <Block flex safe >
+      <Block style={styles.container}>
+        {
+          devices.map((item) => <Block style={styles.card}>
+            <Text>{`Name - ${item.name}`}</Text>
+            <Text>{`IP - ${item.ip}`}</Text>
+          </Block>)
+        }
+      </Block>
     </Block>
   )
 }
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10
+  },
+  card: {
+    marginHorizontal: 10,
+    borderRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white',
+    padding: 10,
+    marginVertical: 6
+  }
+})
 
 export default Devices;

@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 function StatisticsStack() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: 'screen', cardStyle: { backgroundColor: '#F8F9FE' } }}
+      screenOptions={{ headerShown: 'screen', cardStyle: { backgroundColor: '#FFFFFF' } }}
     >
       <Stack.Screen
         name="StatisticsStack"

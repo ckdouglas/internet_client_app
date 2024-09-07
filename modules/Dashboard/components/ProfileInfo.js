@@ -10,6 +10,7 @@ const ProfileInfo = ({ user }) => {
             margin: 10,
             marginTop: 16,
             paddingTop: 0,
+            backgroundColor: 'white'
         }}
         >
             <Block
@@ -21,7 +22,7 @@ const ProfileInfo = ({ user }) => {
                     marginTop: -24
                 }}
             >
-                <Image source={{ uri: 'http://i.pravatar.cc/100?id=skater' }} style={{ width: 56, height: 56, borderRadius: '50%' }} />
+                <Image source={{ uri: 'http://i.pravatar.cc/100?id=skater' }} style={{ width: 56, height: 56, borderRadius: 28 }} />
                 <Block >
                     <Text>John Abram</Text>
                     <Text>0701784536</Text>

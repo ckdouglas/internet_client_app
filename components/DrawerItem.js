@@ -39,9 +39,9 @@ class DrawerItem extends React.Component {
       case "Statistics":
         return (
           <Icon
-            name="chart-pie-35"
-            family="ArgonExtra"
-            size={14}
+            name="trending-up"
+            family="MaterialIcons"
+            size={20}
             color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
           />
         );
@@ -49,6 +49,26 @@ class DrawerItem extends React.Component {
         return (
           <Icon
             name="router"
+            family="MaterialIcons"
+            size={20}
+            color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
+          />
+        );
+
+      case "Tickets":
+        return (
+          <Icon
+            name="queue"
+            family="MaterialIcons"
+            size={20}
+            color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}
+          />
+        );
+
+      case "Speed Test":
+        return (
+          <Icon
+            name="speed"
             family="MaterialIcons"
             size={20}
             color={focused ? defaultTheme.COLORS.WHITE : defaultTheme.COLORS.PRIMARY}

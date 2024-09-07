@@ -1,52 +1,100 @@
-import { Block, Text } from "galio-framework";
+import { Block, Text, Button } from "galio-framework";
 import React, { useState } from "react";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { argonTheme } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
 
 const Router_Management = () => {
   const [routerOn, setRouterOn] = useState(true);
- const navigation = useNavigation();
+  const navigation = useNavigation();
 
-  const onManageWifi = () => {
-    navigation.navigate("Manage WI-FI");
-  }
-
-  const onViewDevices = () => {
-    navigation.navigate("Devices List");
-  }
-
-  return (<Block>
-    <Block>
-      <MaterialCommunityIcons
-        name="circle"
-        style={{
-          backgroundColor: routerOn ? argonTheme.COLORS.SUCCESS : argonTheme.COLORS.WARNING
-        }}
-        size={24}
-      />
-      <Text>{routerOn ? "On" : "Off"}</Text>
-    </Block>
-    <Block>
-      <TouchableOpacity onPress={onManageWifi}>
+  return (
+    <>
+      <Block style={styles.router}>
         <MaterialCommunityIcons
-          name="wifi-cog"
+          name="circle"
+          style={{
+            color: routerOn ? argonTheme.COLORS.SUCCESS : argonTheme.COLORS.WARNING,
+            marginRight: 12
+          }}
           size={24}
         />
-        <Text>Manage Wifi</Text>
-      </TouchableOpacity>
-    </Block>
-    <Block>
-      <TouchableOpacity onPress={onViewDevices}>
-        <MaterialCommunityIcons
-          name="devices"
-          size={24}
-        />
-        <Text>View Devices</Text>
-      </TouchableOpacity>
-    </Block>
-  </Block>)
+        <Text >{routerOn ? "Router On" : "Router Off"}</Text>
+      </Block>
+      <View style={styles.container}>
+        <Block row style={styles.cardContainer}>
+          <Block style={styles.card}>
+            <Button
+              color="transparent"
+              round
+              size="large"
+              shadowless
+              style={styles.button}
+              onPress={() => navigation.navigate("Manage WI-FI")}>
+              <MaterialCommunityIcons
+                name="wifi-cog"
+                size={24}
+              />
+              <Text>Manage Wifi</Text>
+            </Button>
+          </Block>
+
+          <Block style={styles.card}>
+            <Button
+              color="transparent"
+              round
+              size="large"
+              shadowless
+              style={styles.button}
+              onPress={() => navigation.navigate("Devices List")}>
+              <MaterialCommunityIcons
+                name="devices"
+                size={24}
+              />
+              <Text>View Devices</Text>
+            </Button>
+          </Block>
+        </Block>
+      </View>
+    </>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingTop: 20,
+  },
+  cardContainer: {
+    width: '100%',
+    justifyContent: 'space-around',
+  },
+  router: {
+    borderRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white',
+    marginHorizontal: 8,
+    marginVertical: 16,
+    padding:8,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  card: {
+    flex: 1,
+    marginHorizontal: 10,
+    borderRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white',
+  },
+  button: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Router_Management;

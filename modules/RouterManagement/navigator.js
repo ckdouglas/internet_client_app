@@ -5,7 +5,7 @@ import { Devices, Router_Management, ManageWifi } from "./screens";
 
 const Stack = createStackNavigator();
 
-function Router_ManagementStack() {
+function Router_ManagementStack({ navigation }) {
     return (
       <Stack.Navigator
         screenOptions={{ headerShown: 'screen' }}

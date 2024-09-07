@@ -1,42 +1,43 @@
-import { Block } from "galio-framework";
+import { Block, Text, Button, Input } from "galio-framework";
 import React, { useState } from "react";
-import { KeyboardAvoidingView } from "react-native";
-import { Input } from "../../../components";
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
+
 import { argonTheme } from "../../../constants";
 
 const ManageWifi = () => {
   const [name, setName] = useState(null);
   const [password, setPassWord] = useState(null);
 
-
-  return (<Block>
+  return (<Block safe flex style={{ margin: 16 }}>
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior="padding"
       enabled
     >
-      <Text>Name</Text>
-      <Input
-        borderless
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-      />
-      <Text>Password</Text>
-      <Input
-        borderless
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassWord}
-      />
-      <Block middle>
-        <Button style={manageWifiStyles.createButton} onPress={handleLogin} >
-          <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-            Save
-          </Text>
-        </Button>
-      </Block>
+      <View>
+        <Text>Name</Text>
+        <Input
+          borderless
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+        />
+        <Text>Password</Text>
+        <Input
+          borderless
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassWord}
+        />
+        <Block middle>
+          <Button style={manageWifiStyles.createButton} onPress={() => console.log("Save")} >
+            <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+              Save
+            </Text>
+          </Button>
+        </Block>
+      </View>
     </KeyboardAvoidingView>
   </Block>)
 }
