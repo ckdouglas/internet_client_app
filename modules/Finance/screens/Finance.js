@@ -14,7 +14,7 @@ const Finance = ({ navigation }) => {
             shadowless
             style={styles.button}
             onPress={() => navigation.navigate('Reciepts')}>
-            <Text color="info">Reciepts</Text>
+            <Text color="info">Receipts</Text>
           </Button>
         </Block>
 

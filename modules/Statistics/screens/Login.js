@@ -14,7 +14,6 @@ import { Button, Icon, Input } from "../../../components";
 import { Images, argonTheme } from "../../../constants";
 import { useDispatch } from "react-redux";
 import { login } from "../../../redux/slices/authSlice"; // Import Redux action
-import { attemptLogin } from "../api/auth/auth/auth";
 
 const { width, height } = Dimensions.get("screen");
 

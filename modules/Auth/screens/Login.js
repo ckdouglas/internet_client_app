@@ -1,43 +1,43 @@
 import React from "react";
 import {
   StyleSheet,
-  ImageBackground,
-  Image,
   Dimensions,
   StatusBar,
   KeyboardAvoidingView,
-  Alert
+  Alert,
+  ActivityIndicator
 } from "react-native";
-import { Block, Checkbox, Text, theme } from "galio-framework";
+import { Block, Checkbox, Text } from "galio-framework";
 
 import { Button, Icon, Input } from "../../../components";
-import { Images, argonTheme } from "../../../constants";
+import { argonTheme } from "../../../constants";
+import { attemptLogin } from "../api";
 import { useDispatch } from "react-redux";
 import { login } from "../slice";
-import { attemptLogin } from "../api";
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 
-const Login = ({ navigation }) => {
-
+const Login = ({ }) => {
   const [checkedPolicy, setCheckedPolicy] = React.useState(false);
-  const [username, setUserName] = React.useState("");
-  const [password, setPassWord] = React.useState("");
-
-  const dispatch = useDispatch();
+  const [username, setUserName] = React.useState("AG01091");
+  const [password, setPassWord] = React.useState("CqmP1");
+  const [loading, setLoading] = React.useState(false);
+  const  dispatch = useDispatch();
 
   const handleLogin = async () => {
-    // Basic validation
     if (username === "" || password === "") {
       Alert.alert("Error", "Please enter both username and password.");
       return;
     }
-    // Example authentication logic
-    const data = await attemptLogin(username, password);
-    if (data.success)
-      dispatch(login(data)); // Dispatch login action
-    else
-      Alert.alert("Error", "Invalid username or password.");
+
+    setLoading(true);
+    await attemptLogin(username, password).then(() => {
+      dispatch(login());
+    }).catch((e) => {
+      Alert.alert("Error", "Invalid username or password. Try again.");
+    }).finally(() => {
+      setLoading(false);
+    });
   };
 
   return (
@@ -46,7 +46,6 @@ const Login = ({ navigation }) => {
       <StatusBar />
       <Block flex>
         <Block flex={0.2} middle>
-          {/* <Image styles={styles.logo} source={Images.Logo} /> */}
           <Text style={styles.title}>AGAPE INTERNET SOLUTIONS</Text>
         </Block>
         <Block flex center>
@@ -107,10 +106,10 @@ const Login = ({ navigation }) => {
               </Text>
             </Block>
             <Block middle>
-              <Button style={styles.createButton} onPress={handleLogin} >
-                <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+              <Button style={styles.createButton} onPress={handleLogin}>
+                {loading ? <ActivityIndicator /> : <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                   Sign In
-                </Text>
+                </Text>}
               </Button>
             </Block>
           </KeyboardAvoidingView>

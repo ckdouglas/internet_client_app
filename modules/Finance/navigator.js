@@ -34,7 +34,7 @@ export default FinanceStack = ({ navigation }) => {
               <Icon name="chevron-left" family="Entypo" size={24} color="black" />
             </TouchableOpacity>
           ),
-          headerTitle: 'Reciepts', // Optionally remove the title
+          headerTitle: 'Receipts', // Optionally remove the title
           headerStyle: {
             // You can customize the header style here
           },
