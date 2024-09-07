@@ -2,16 +2,13 @@ import React from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { Block, Text, Button } from 'galio-framework';
 import { StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
-const paymentDetails = {
-    number: '202401009260',
-    documentDate: '2024-07-11',
-    totalWithoutTax: '0.00 Sh',
-    tax: '0.00 Sh',
-    total: '4500.00 Sh',
-};
 
 const ViewReceipt = () => {
+    const route = useRoute();
+    const {item} = route.params
+
     const handlePrint = () => {
         // Implement the functionality to print or save as PDF
         console.log('Print PDF');
@@ -24,26 +21,25 @@ const ViewReceipt = () => {
                 <ScrollView contentContainerStyle={styles.detailsContainer}>
                     <Block row space="between" style={styles.detailRow}>
                         <Text style={styles.detailLabel}>Number:</Text>
-                        <Text style={styles.detailValue}>{paymentDetails.number}</Text>
+                        <Text style={styles.detailValue}>{item.receipt_number}</Text>
                     </Block>
                     <Block row space="between" style={styles.detailRow}>
-                        <Text style={styles.detailLabel}>Document date:</Text>
-                        <Text style={styles.detailValue}>{paymentDetails.documentDate}</Text>
+                        <Text style={styles.detailLabel}>Receipt date:</Text>
+                        <Text style={styles.detailValue}>{item.date}</Text>
                     </Block>
                     <Block row space="between" style={styles.detailRow}>
-                        <Text style={styles.detailLabel}>Total without tax:</Text>
-                        <Text style={styles.detailValue}>{paymentDetails.totalWithoutTax}</Text>
+                        <Text style={styles.detailLabel}>Transaction ID:</Text>
+                        <Text style={styles.detailValue}>{item.field_1}</Text>
                     </Block>
                     <Block row space="between" style={styles.detailRow}>
-                        <Text style={styles.detailLabel}>Tax:</Text>
-                        <Text style={styles.detailValue}>{paymentDetails.tax}</Text>
+                        <Text style={styles.detailLabel}>Amount:</Text>
+                        <Text style={styles.detailValue}>{item.amount}</Text>
                     </Block>
                     <Block row space="between" style={styles.detailRow}>
-                        <Text style={styles.detailLabel}>Total:</Text>
-                        <Text style={styles.totalValue}>{paymentDetails.total}</Text>
+                        <Text style={styles.detailLabel}>Comment:</Text>
+                        <Text style={styles.totalValue}>{item.comment}</Text>
                     </Block>
                 </ScrollView>
-
                 {/* Print Button */}
                 <TouchableOpacity onPress={handlePrint} style={styles.buttonContainer}>
                     <Button color="green" style={styles.printButton}>

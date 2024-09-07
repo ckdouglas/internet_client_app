@@ -2,7 +2,7 @@ import React from "react";
 import { Block, Card, Text } from "galio-framework";
 import { Icon } from "../../../components";
 
-const ActivePackage = () => {
+const ActivePackage = ({activePackage, activationTime}) => {
     return (
         <Block style={{ margin: 10 }}>
             <Text style={{fontWeight: 'bold'}}>ACTIVE PACKAGE</Text>
@@ -30,10 +30,9 @@ const ActivePackage = () => {
                     </Block>
                     <Block >
                         <Block row>
-                            <Text>Gold</Text>
-                            <Text>10MBP/S</Text>
+                            <Text>{activePackage}</Text>
                         </Block>
-                        <Text>Progress here?</Text>
+                        <Text>{`Since ${activationTime}`}</Text>
                     </Block>
                 </Block>
             </Card>

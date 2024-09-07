@@ -4,7 +4,7 @@ import {
     Image,
 } from "react-native";
 
-const ProfileInfo = ({ user }) => {
+const ProfileInfo = ({ customer }) => {
     return (
         <Card style={{
             margin: 10,
@@ -24,8 +24,8 @@ const ProfileInfo = ({ user }) => {
             >
                 <Image source={{ uri: 'http://i.pravatar.cc/100?id=skater' }} style={{ width: 56, height: 56, borderRadius: 28 }} />
                 <Block >
-                    <Text>John Abram</Text>
-                    <Text>0701784536</Text>
+                    <Text>{customer.name}</Text>
+                    <Text>{customer.phone}</Text>
                 </Block>
             </Block>
         </Card>

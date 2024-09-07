@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Block, Text, Input, Icon } from 'galio-framework';
 import DatePicker from '../../../components/DatePicker';
-
-const payments = [
-    { id: '202401009260', date: '2024-07-11', amount: '4500.00 Sh' },
-    { id: '202401007629', date: '2024-06-12', amount: '4500.00 Sh' },
-    { id: '202401005985', date: '2024-05-08', amount: '4500.00 Sh' },
-    { id: '202401004501', date: '2024-04-08', amount: '4500.00 Sh' },
-    { id: '202401002926', date: '2024-03-06', amount: '2500.00 Sh' },
-    { id: '202401001499', date: '2024-02-05', amount: '2500.00 Sh' },
-    { id: '202401009260', date: '2024-07-11', amount: '4500.00 Sh' },
-    { id: '202401007629', date: '2024-06-12', amount: '4500.00 Sh' },
-    { id: '202401005985', date: '2024-05-08', amount: '4500.00 Sh' }
-];
+import { getReceipts } from '../api';
 
 const Reciepts = ({ navigation }) => {
-
     const [startDate, setStartDate] = useState('2024-08-10');
     const [endDate, setEndDate] = useState('2024-08-11');
-    
+    const [receipts, setReceipts] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchReceipts();
+    }, []);
+
+    const fetchReceipts = () => {
+        getReceipts()
+            .then((data) => {
+                console.log("data", data);
+                setReceipts(data);
+            })
+            .catch((e) => console.log("e----", e))
+            .finally(() => setLoading(false))
+    }
+
     const renderItem = ({ item }) => (
         <TouchableOpacity
             key={item.id}
@@ -38,19 +42,21 @@ const Reciepts = ({ navigation }) => {
 
     return (
         <Block safe flex style={styles.container}>
-            {/* Date Range Input */}
-            <DatePicker
-                startDate={startDate}
-                setStartDate={setStartDate}
-                endDate={endDate}
-                setEndDate={setEndDate}
-            />
-            <FlatList
-                data={payments}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-                contentContainerStyle={styles.paymentList}
-            />
+            {loading ? <ActivityIndicator /> : <>
+                <DatePicker
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                    endDate={endDate}
+                    setEndDate={setEndDate}
+                />
+                <FlatList
+                    data={receipts}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={styles.paymentList}
+                />
+            </>
+            }
         </Block>
     );
 };
