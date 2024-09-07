@@ -20,13 +20,14 @@ const Dashboard = () => {
       label: 'Router',
       icon: 'router',
       onPress: () => {
-        navigation.navigate("RouterManagementStack");
+        navigation.navigate("Router Management");
       }
     },
     {
       label: 'Pay',
       icon: 'attach-money',
       onPress: () => {
+        navigation.navigate("Payment");
         console.log("Navigate to Pay");
       }
     },
@@ -34,29 +35,29 @@ const Dashboard = () => {
       label: 'Financials',
       icon: 'payment',
       onPress: () => {
-        navigation.navigate("FinanceStack");
+        navigation.navigate("Finance");
       }
     },
     {
       label: 'Stats',
       icon: 'trending-up',
       onPress: () => {
-        navigation.navigate("StatisticsStack");
+        navigation.navigate("Statistics");
       }
     },
   ]
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchMyInfo()
-  },[]);
+  }, []);
 
   const fetchMyInfo = async () => {
     getMyInfo()
-    .then(({ name, phone, additional_attributes }) => {
-      setCustomer({ name, phone, activePackage: additional_attributes.plan_title, activationTime: additional_attributes.activation_time });
-    })
-    .catch((e)=> console.log("e----", e))
-    .finally(() => setLoading(false))
+      .then(({ name, phone, additional_attributes }) => {
+        setCustomer({ name, phone, activePackage: additional_attributes.plan_title, activationTime: additional_attributes.activation_time });
+      })
+      .catch((e) => console.log("e----", e))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -74,7 +75,7 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor: '#fff'
   },
 })
 
