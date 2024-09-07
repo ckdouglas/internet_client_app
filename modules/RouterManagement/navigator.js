@@ -1,8 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Header, Icon } from "../../components";
+import { Header } from "../../components";
 import { Devices, Router_Management, ManageWifi } from "./screens";
-import { TouchableOpacity } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -12,7 +11,7 @@ function Router_ManagementStack({ navigation }) {
         screenOptions={{ headerShown: 'screen' }}
       >
         <Stack.Screen
-          name="RouterManagementStack"
+          name="RouterManagement"
           component={Router_Management}
           options={{
             header: ({ navigation, scene }) => (
@@ -24,24 +23,18 @@ function Router_ManagementStack({ navigation }) {
           name="Devices List"
           component={Devices}
           options={{
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.navigate("RouterManagementStack")} style={{ padding: 10 }}>
-                <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-              </TouchableOpacity>
+            header: ({ navigation, scene }) => (
+              <Header title="Devices List" navigation={navigation} scene={scene} />
             ),
-            headerTitle: 'Devices List',
           }}
         />
         <Stack.Screen
           name="Manage WI-FI"
           component={ManageWifi}
           options={{
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.navigate("RouterManagementStack")} style={{ padding: 10 }}>
-                <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-              </TouchableOpacity>
+            header: ({ navigation, scene }) => (
+              <Header title="Manage WI-FI" navigation={navigation} scene={scene} />
             ),
-            headerTitle: 'Manage WI-FI',
           }}
         />
       </Stack.Navigator>

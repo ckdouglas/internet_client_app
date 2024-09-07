@@ -41,7 +41,6 @@ const Login = ({ }) => {
   };
 
   return (
-
     <Block safe flex middle>
       <StatusBar />
       <Block flex>
@@ -120,9 +119,6 @@ const Login = ({ }) => {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 28
-  },
   inputIcons: {
     marginRight: 12
   },

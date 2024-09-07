@@ -29,15 +29,9 @@ export default FinanceStack = ({ navigation }) => {
         name="Reciepts"
         component={Reciepts}
         options={{
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("FinanceStack")} style={{ padding: 10 }}>
-              <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-            </TouchableOpacity>
+          header: ({ navigation, scene }) => (
+            <Header title="Reciepts" navigation={navigation} back scene={scene} />
           ),
-          headerTitle: 'Receipts', // Optionally remove the title
-          headerStyle: {
-            // You can customize the header style here
-          },
         }}
       />
 
@@ -46,15 +40,9 @@ export default FinanceStack = ({ navigation }) => {
         name="Invoices"
         component={Invoices}
         options={{
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("FinanceStack")} style={{ padding: 10 }}>
-              <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-            </TouchableOpacity>
+          header: ({ navigation, scene }) => (
+            <Header title="Invoices" navigation={navigation} back scene={scene} />
           ),
-          headerTitle: 'Invoices', // Optionally remove the title
-          headerStyle: {
-            // You can customize the header style here
-          },
         }}
       />
 
@@ -62,15 +50,9 @@ export default FinanceStack = ({ navigation }) => {
         name="View Invoice"
         component={ViewInvoice}
         options={{
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Invoices")} style={{ padding: 10 }}>
-              <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-            </TouchableOpacity>
+          header: ({ navigation, scene }) => (
+            <Header title="Invoice" navigation={navigation} back scene={scene} />
           ),
-          headerTitle: 'View Invoice', // Optionally remove the title
-          headerStyle: {
-            // You can customize the header style here
-          },
         }}
       />
 
@@ -78,15 +60,9 @@ export default FinanceStack = ({ navigation }) => {
         name="View Reciept"
         component={ViewReciept}
         options={{
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Reciepts")} style={{ padding: 10 }}>
-              <Icon name="chevron-left" family="Entypo" size={24} color="black" />
-            </TouchableOpacity>
+          header: ({ navigation, scene }) => (
+            <Header title="Reciept" navigation={navigation} back scene={scene} />
           ),
-          headerTitle: 'View Reciept', // Optionally remove the title
-          headerStyle: {
-            // You can customize the header style here
-          },
         }}
       />
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet, View } from "react-native";
 import { Block } from "galio-framework";
 import { ProfileInfo, Stats } from "../components";
 import ActivePackage from "../components/ActivePackage";
@@ -8,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
-  const stats = {download: 70, upload: 60};
+  const stats = { download: 70, upload: 60 };
   const navigation = useNavigation();
 
   const quickMenuItems = [
@@ -43,13 +44,22 @@ const Dashboard = () => {
   ]
 
   return (
-    <Block safe>
-      <ProfileInfo user={user} />
-      <ActivePackage package={null} />
-      <QuickMenu menuItems={quickMenuItems} />
-      <Stats stats={stats} />
-    </Block>
+    <View style={styles.container}>
+      <Block safe >
+        <ProfileInfo user={user} />
+        <ActivePackage package={null} />
+        <QuickMenu menuItems={quickMenuItems} />
+        <Stats stats={stats} />
+      </Block>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor:'#fff'
+  },
+})
 
 export default Dashboard;
