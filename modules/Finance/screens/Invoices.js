@@ -1,27 +1,15 @@
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Block, Text, Input, Icon } from 'galio-framework';
 import DatePicker from '../../../components/DatePicker';
-
-const invoices = [
-    { id: '202401009260', date: '2024-07-12', amount: '4500.00 Sh', paymentDate: '2024-07-11' },
-    { id: '202401007629', date: '2024-06-12', amount: '4500.00 Sh', paymentDate: '2024-06-12' },
-    { id: '202401005985', date: '2024-05-08', amount: '4500.00 Sh', paymentDate: '2024-05-08' },
-    { id: '202401004501', date: '2024-04-08', amount: '4500.00 Sh', paymentDate: '2024-04-08' },
-    { id: '202401002926', date: '2024-03-06', amount: '2500.00 Sh', paymentDate: '2024-03-06' },
-    { id: '202401001499', date: '2024-02-05', amount: '2500.00 Sh', paymentDate: '2024-02-05' },
-    { id: '202401009260', date: '2024-07-12', amount: '4500.00 Sh', paymentDate: '2024-07-11' },
-    { id: '202401007629', date: '2024-06-12', amount: '4500.00 Sh', paymentDate: '2024-06-12' },
-    { id: '202401005985', date: '2024-05-08', amount: '4500.00 Sh', paymentDate: '2024-05-08' },
-    { id: '202401004501', date: '2024-04-08', amount: '4500.00 Sh', paymentDate: '2024-04-08' },
-    { id: '202401002926', date: '2024-03-06', amount: '2500.00 Sh', paymentDate: '2024-03-06' },
-    { id: '202401001499', date: '2024-02-05', amount: '2500.00 Sh', paymentDate: '2024-02-05' }
-];
+import { getInvoices } from '../api';
+import { capitalizeFirstLetter } from '../../../shared/utils';
 
 const Invoices = ({ navigation }) => {
-    
     const [startDate, setStartDate] = useState('2024-08-10');
     const [endDate, setEndDate] = useState('2024-08-11');
+    const [invoices, setInvoices] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
@@ -30,23 +18,38 @@ const Invoices = ({ navigation }) => {
         >
             <Block style={styles.invoiceCard}>
                 <Block row space="between" style={styles.invoiceHeader}>
-                    <Text style={styles.invoiceLabel}>Recurring invoice</Text>
-                    <Text style={styles.paidLabel}>Paid</Text>
+                    <Text style={styles.invoiceLabel}>{capitalizeFirstLetter(item.type)}</Text>
+                    <Text style={styles.paidLabel}>{capitalizeFirstLetter(item.status)}</Text>
                 </Block>
                 <Block row space="between" style={styles.invoiceDetails}>
                     <Text style={styles.invoiceId}># {item.id}</Text>
-                    <Text style={styles.invoiceDate}>Date {item.date}</Text>
+                    <Text style={styles.invoiceDate}>Date: {item.date_created}</Text>
                 </Block>
                 <Block row space="between" style={styles.invoiceDetails}>
-                    <Text style={styles.invoiceAmount}>Total {item.amount}</Text>
-                    <Text style={styles.paymentDate}>Payment date {item.paymentDate}</Text>
+                    <Text style={styles.invoiceAmount}>Total {item.total}</Text>
+                    <Text style={styles.paymentDate}>Payment date {item.date_payment}</Text>
                 </Block>
             </Block>
         </TouchableOpacity>
     );
 
+    useEffect(() => {
+        fetchInvoices();
+    }, []);
+
+    const fetchInvoices = () => {
+        getInvoices()
+            .then((data) => {
+                console.log("data", data);
+                setInvoices(data);
+            })
+            .catch((e) => console.log("e----", e))
+            .finally(() => setLoading(false))
+    }
+
     return (
         <Block safe flex style={styles.container}>
+            {loading ? <ActivityIndicator /> : <>
             <DatePicker
                 startDate={startDate}
                 setStartDate={setStartDate}
@@ -59,6 +62,7 @@ const Invoices = ({ navigation }) => {
                 keyExtractor={(item) => item.id}
                 contentContainerStyle={styles.invoiceList}
             />
+            </>}
         </Block>
     );
 };
