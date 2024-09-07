@@ -1,8 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Header, Icon } from "../../components";
+import { Header } from "../../components";
 import { Devices, Router_Management, ManageWifi } from "./screens";
-import { TouchableOpacity } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -12,7 +11,7 @@ function Router_ManagementStack({ navigation }) {
         screenOptions={{ headerShown: 'screen' }}
       >
         <Stack.Screen
-          name="RouterManagementStack"
+          name="RouterManagement"
           component={Router_Management}
           options={{
             header: ({ navigation, scene }) => (
@@ -25,7 +24,7 @@ function Router_ManagementStack({ navigation }) {
           component={Devices}
           options={{
             header: ({ navigation, scene }) => (
-              <Header title="Devices" navigation={navigation} back scene={scene} />
+              <Header title="Devices List" navigation={navigation} scene={scene} />
             ),
           }}
         />
@@ -34,7 +33,7 @@ function Router_ManagementStack({ navigation }) {
           component={ManageWifi}
           options={{
             header: ({ navigation, scene }) => (
-              <Header title="Manage Wifi" navigation={navigation} back scene={scene} />
+              <Header title="Manage WI-FI" navigation={navigation} scene={scene} />
             ),
           }}
         />

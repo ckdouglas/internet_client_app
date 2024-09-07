@@ -41,7 +41,6 @@ const Login = ({ navigation }) => {
   };
 
   return (
-
     <Block safe flex middle>
       <StatusBar />
       <Block flex>

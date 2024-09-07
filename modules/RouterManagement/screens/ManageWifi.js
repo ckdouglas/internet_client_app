@@ -1,12 +1,12 @@
 import { Block, Text, Button, Input } from "galio-framework";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
+
 import { argonTheme } from "../../../constants";
 
 const ManageWifi = () => {
   const [name, setName] = useState(null);
   const [password, setPassWord] = useState(null);
-
 
   return (<Block safe flex style={{ margin: 16 }}>
     <KeyboardAvoidingView
